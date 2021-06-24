@@ -30325,7 +30325,7 @@ const paperback_extensions_common_1 = require("paperback-extensions-common");
 const Parser_1 = require("./Parser");
 const BATOTO_DOMAIN = 'https://bato.to';
 exports.BatoToInfo = {
-    version: '1.1.8',
+    version: '1.1.9',
     name: 'Bato.To',
     description: 'Extension that pulls western comics from bato.to',
     author: 'GameFuzzy',
@@ -30337,6 +30337,10 @@ exports.BatoToInfo = {
         {
             text: "Notifications",
             type: paperback_extensions_common_1.TagType.GREEN
+        },
+        {
+            text: "Cloudflare",
+            type: paperback_extensions_common_1.TagType.RED
         }
     ]
 };
@@ -30505,7 +30509,7 @@ class BatoTo extends paperback_extensions_common_1.Source {
             let page = (_a = metadata === null || metadata === void 0 ? void 0 : metadata.page) !== null && _a !== void 0 ? _a : 1;
             switch (homepageSectionId) {
                 case '0': {
-                    webPage = `?sort=views_a&page=${page}`;
+                    webPage = `?sort=create&page=${page}`;
                     break;
                 }
                 case '1': {
@@ -30513,7 +30517,7 @@ class BatoTo extends paperback_extensions_common_1.Source {
                     break;
                 }
                 case '2': {
-                    webPage = `?sort=create&page=${page}`;
+                    webPage = `?sort=views_a&page=${page}`;
                     break;
                 }
                 default:
@@ -30539,7 +30543,7 @@ class BatoTo extends paperback_extensions_common_1.Source {
             });
         });
     }
-    cloudflareBypassRequest() {
+    getCloudflareBypassRequest() {
         return createRequestObject({
             url: `${BATOTO_DOMAIN}`,
             method: 'GET',
